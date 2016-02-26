@@ -18,6 +18,13 @@ module.exports = function(grunt) {
       options = config;
     }
 
+    if (options.ignore != undefined)
+    {
+      var ignore = require('ignore');
+      var ig = ignore(options).addPattern(options.ignore);
+      files = ig.filter(files);
+    }
+
     files.forEach(function(file) {
       grunt.verbose.writeln('Linting ' + file + '...');
 
